@@ -31,4 +31,4 @@ jobs:
         run: docker tag kevlar-vault ghcr.io/${{ github.repository }}/kevlar-vault:${{ github.sha }}
 
       - name: Push Docker image to GitHub Container Registry
-        run: docker push ghcr.io/${{ github.repository }}/kevlar-vaultE:${{ github.sha }}
+        run: docker push ghcr.io/${{ github.repository }}/kevlar-vault:${{ github.sha }}
