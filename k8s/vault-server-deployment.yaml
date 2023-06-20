@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f vault/docker/docker-compose.yml -o k8s/
+    kompose.version: 1.26.1 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: vault-server
+  name: vault-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: vault-server
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f vault/docker/docker-compose.yml -o k8s/
+        kompose.version: 1.26.1 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/docker-develop: "true"
+        io.kompose.service: vault-server
+    spec:
+      containers:
+        - command:
+            - /home/vault/config/entrypoint.sh
+          image: kevlar-xyz/kevlar-vault:latest
+          name: vault_server
+          ports:
+            - containerPort: 9200
+          resources: {}
+          volumeMounts:
+            - mountPath: /home/vault/config
+              name: vault-server-claim0
+      restartPolicy: Always
+      volumes:
+        - name: vault-server-claim0
+          persistentVolumeClaim:
+            claimName: vault-server-claim0
+status: {}

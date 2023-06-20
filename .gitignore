@@ -27,3 +27,5 @@ docker/config/vault.csr
 docker/config/vault.key
 docker/ganache_data/
 
+# nix 
+.nix-node

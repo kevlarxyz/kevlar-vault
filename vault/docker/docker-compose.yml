@@ -1,4 +1,4 @@
-version: "2"
+ersion: "2"
 
 services:
   vault_server:
@@ -6,7 +6,7 @@ services:
       - develop
     links:
       - "ganache"
-    image: "cypherhat/vault-ethereum:latest"
+    image: "kevlar-xyz/kevlar-vault:latest"
     ports:
       - "9200:9200"
     volumes:

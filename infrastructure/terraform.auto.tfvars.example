@@ -1,0 +1,51 @@
+# AWS Provider
+aws_region = "us-east-2"
+aws_key_administrators = "arn:aws:iam::11111111111:user/admin"
+
+# Cluster Configuration
+cluster_name          = "kevlar"
+cluster_instance_type = "t3.medium"
+min_cluster_size      = 1
+max_cluster_size      = 5
+desired_cluster_size  = 2
+
+# Cluster Tags
+default_tags = {
+  "managed-by" = "terraform"
+  "owner"      = "kevlar"
+  "env"        = "dev"
+}
+
+# Cluster Provider Configuration
+kubernetes_namespace = "kevlar"
+
+# Vault configuration
+vault_image = "vault:1.6.2"
+vault_cluster_size = 3
+vault_storage_size = "10gi"
+vault_storage_class = ""
+
+# Access
+kubernetes_service_account = "vault"
+
+# KMS configuration
+vault_kms_key_id = var.kms_key_id
+vault_kms_key_region = var.aws_region
+
+# S3 configuration
+# vault_oss_bucket = ""
+# vault_oss_endpoint = ""
+# vault_oss_prefix = "vault"
+
+# Naming
+labels = ""
+annotations = {}
+vault_cluster_name = "kevlar-vault"
+vault_cluster_annotations = {}
+vault_ingress_annotations = {}
+vault_ingress_hostname = "vault.kevlar"
+vault_ingress_class_name = ""
+
+# Extra config
+vault_log_level = "error"
+vault_external_config = ""

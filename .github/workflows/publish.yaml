@@ -1,0 +1,34 @@
+name: Publish Docker image to GitHub Container Registry
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE_NAME: kevlar-vault
+  DOCKERFILE_PATH: vault/Dockerfile
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: docker build -t $IMAGE_NAME -f $DOCKERFILE_PATH vault/
+
+      - name: Tag Docker image
+        run: docker tag $IMAGE_NAME ghcr.io/${{ github.repository }}/$IMAGE_NAME:${{ github.sha }}
+
+      - name: Push Docker image to GitHub Container Registry
+        run: docker push ghcr.io/${{ github.repository }}/$IMAGE_NAME:${{ github.sha }}
