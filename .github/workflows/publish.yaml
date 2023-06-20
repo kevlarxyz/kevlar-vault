@@ -25,10 +25,10 @@ jobs:
           password: ${{ secrets.TOKEN }}
 
       - name: Build Docker image
-        run: docker build -t $IMAGE_NAME -f $DOCKERFILE_PATH vault/
+        run: docker build -t kevlar-vault -f $DOCKERFILE_PATH vault/
 
       - name: Tag Docker image
-        run: docker tag $IMAGE_NAME ghcr.io/${{ github.repository }}/$IMAGE_NAME:${{ github.sha }}
+        run: docker tag kevlar-vault ghcr.io/${{ github.repository }}/kevlar-vault:${{ github.sha }}
 
       - name: Push Docker image to GitHub Container Registry
-        run: docker push ghcr.io/${{ github.repository }}/$IMAGE_NAME:${{ github.sha }}
+        run: docker push ghcr.io/${{ github.repository }}/kevlar-vaultE:${{ github.sha }}
