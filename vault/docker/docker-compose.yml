@@ -1,4 +1,4 @@
-ersion: "2"
+version: "2"
 
 services:
   vault_server:
@@ -6,7 +6,7 @@ services:
       - develop
     links:
       - "ganache"
-    image: "kevlar-xyz/kevlar-vault:latest"
+    image: "ghcr.io/kevlarxyz/kevlar-vault/kevlar-vault:6a40cc344fcc46d0b0cd6e0eb5e0178c83c20a91"
     ports:
       - "9200:9200"
     volumes:
